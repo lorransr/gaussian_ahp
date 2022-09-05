@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def normalize_matrix(inputs: AhpInputs):
-    matrix = inputs.decision_matrix
+    matrix = pd.DataFrame(inputs.decision_matrix,index=inputs.alternatives)
 
     for criteria, criteria_type in inputs.criteria_type.items():
         if criteria_type == "MAX":

@@ -12,7 +12,6 @@ def get_gaussian_ahp_inputs() -> AhpInputs:
         "duracao": [24, 18, 10],
     }
     alternatives = ["xiaomi", "samsung", "iphone"]
-    decision_matrix = pd.DataFrame(decision_matrix, index=alternatives)
     criteria_type = {
         "custo": "MIN",
         "camera": "MAX",
@@ -23,6 +22,7 @@ def get_gaussian_ahp_inputs() -> AhpInputs:
         decision_matrix=decision_matrix,
         criteria_type=criteria_type,
         pearson_correlation=False,
+        alternatives=alternatives
     )
 
 
@@ -35,7 +35,6 @@ def get_gaussian_ahp_pearson_correlation_inputs() -> AhpInputs:
         "duracao": [19, 24, 30],
     }
     alternatives = ["iphone", "samsung", "motorola"]
-    decision_matrix = pd.DataFrame(decision_matrix, index=alternatives)
     criteria_type = {
         "custo": "MIN",
         "camera": "MAX",
@@ -47,6 +46,7 @@ def get_gaussian_ahp_pearson_correlation_inputs() -> AhpInputs:
         decision_matrix=decision_matrix,
         criteria_type=criteria_type,
         pearson_correlation=True,
+        alternatives=alternatives
     )
 
 

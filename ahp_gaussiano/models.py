@@ -1,12 +1,16 @@
 from dataclasses import dataclass
 import pandas as pd
+from pydantic import BaseModel
 
 
-@dataclass
-class AhpInputs:
-    decision_matrix: pd.DataFrame
+
+class AhpInputs(BaseModel):
+    class Config:
+        arbitrary_types_allowed = True
+    decision_matrix: dict
     criteria_type: dict
     pearson_correlation: bool
+    alternatives: list
 
 
 @dataclass
