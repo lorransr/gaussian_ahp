@@ -3,6 +3,7 @@
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
+*.zip
 __pycache__/
 *.py[cod]
 *$py.class
@@ -380,3 +381,4 @@ cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
 .vscode/
+*.zip/
