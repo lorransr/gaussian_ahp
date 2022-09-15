@@ -3,9 +3,9 @@ import pandas as pd
 
 
 def normalize_matrix(inputs: AhpInputs):
-    matrix = pd.DataFrame(inputs.decision_matrix,index=inputs.alternatives)
+    matrix = pd.DataFrame(inputs.vars,columns=inputs.criteria,index=inputs.alternatives)
 
-    for criteria, criteria_type in inputs.criteria_type.items():
+    for criteria, criteria_type in dict(zip(inputs.criteria,inputs.criteria_type_list)).items():
         if criteria_type == "MAX":
 
             matrix.loc[:, criteria] = matrix[criteria] / matrix[criteria].sum()
