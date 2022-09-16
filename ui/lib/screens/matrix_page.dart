@@ -187,11 +187,7 @@ class _MatrixPageState extends State<MatrixPage> {
     List<Criteria> criterias = [];
     int i = 0;
     while (i < n) {
-      criterias.add(
-        Criteria(
-            name: "criteria_$i",
-            type: CriteriaType.benefit)
-      );
+      criterias.add(Criteria(name: "criteria_$i", type: CriteriaType.benefit));
       i++;
     }
     return criterias;
@@ -208,7 +204,7 @@ class _MatrixPageState extends State<MatrixPage> {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 200,
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blueGrey,
         leading: TextButton.icon(
           onPressed: () => Navigator.pop(context),
           icon: Icon(

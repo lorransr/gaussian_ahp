@@ -36,7 +36,7 @@ class _ResultPageState extends State<ResultPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Results'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blueGrey,
       ),
       body: Column(
         children: [
@@ -189,7 +189,6 @@ class _ResultPageState extends State<ResultPage> {
       idx += 1;
       _rows.add(DataRow(cells: _cells));
     });
-
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -372,8 +371,8 @@ class _ResultPageState extends State<ResultPage> {
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
               child: Container(
-                  child:
-                      _seriesTile(data.results.normalizedGaussianFactor,"Alternatives")),
+                  child: _seriesTile(
+                      data.results.normalizedGaussianFactor, "Alternatives")),
             ),
           ),
           ListTile(
@@ -395,8 +394,8 @@ class _ResultPageState extends State<ResultPage> {
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child:
-                  Container(child: _seriesTile(data.results.weightedSum,"Alternatives")),
+              child: Container(
+                  child: _seriesTile(data.results.weightedSum, "Alternatives")),
             ),
           ),
           _showCorrelationTiles(input, data, _alternatives),
@@ -427,7 +426,7 @@ class _ResultPageState extends State<ResultPage> {
     if (input.pearsonCorrelation) {
       return Column(
         children: [
-            ListTile(
+          ListTile(
             title: Text(
               "Correlation Matrix",
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -435,8 +434,9 @@ class _ResultPageState extends State<ResultPage> {
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
               child: Container(
-                  child:
-                      _matrixTile(data.results.correlationMatrix!,alternatives: data.results.correlationMatrix!.keys.toList())),
+                  child: _matrixTile(data.results.correlationMatrix!,
+                      alternatives:
+                          data.results.correlationMatrix!.keys.toList())),
             ),
           ),
           ListTile(
@@ -446,8 +446,9 @@ class _ResultPageState extends State<ResultPage> {
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child:
-                  Container(child: _seriesTile(data.results.correlationFactor!,"Alternatives")),
+              child: Container(
+                  child: _seriesTile(
+                      data.results.correlationFactor!, "Alternatives")),
             ),
           ),
           ListTile(
@@ -457,8 +458,9 @@ class _ResultPageState extends State<ResultPage> {
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child:
-                  Container(child: _seriesTile(data.results.normalizedCorrelationFactor!,"Alternatives")),
+              child: Container(
+                  child: _seriesTile(data.results.normalizedCorrelationFactor!,
+                      "Alternatives")),
             ),
           ),
         ],

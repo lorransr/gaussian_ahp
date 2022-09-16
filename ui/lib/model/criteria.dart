@@ -32,7 +32,7 @@ String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
 
 CriteriaType getCriteriaType(String? criteriaTypeName) {
   if (criteriaTypeName != null &&
-      CriteriaType.benefit.toString().contains(criteriaTypeName)) {
+      "MAX" == criteriaTypeName) {
     return CriteriaType.benefit;
   } else {
     return CriteriaType.cost;

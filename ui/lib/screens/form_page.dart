@@ -45,7 +45,7 @@ class _CriteriaFormState extends State<CriteriaForm> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blueGrey,
         title: Text('Criteria Input'),
       ),
       body: Form(
@@ -162,10 +162,7 @@ class _CriteriaTextFieldsState extends State<CriteriaTextFields> {
   late TextEditingController _weightController;
   late TextEditingController _idealPointController;
   late TextEditingController _antiIdealPointController;
-  List<String> _criteriaTypeList = [
-    CriteriaType.benefit.name,
-    CriteriaType.cost.name
-  ];
+  List<String> _criteriaTypeList = ["MAX", "MIN"];
 
   @override
   void initState() {

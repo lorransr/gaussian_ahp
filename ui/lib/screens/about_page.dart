@@ -15,7 +15,7 @@ class _AboutPageState extends State<AboutPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('About us'),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blueGrey,
       ),
       body: Column(
         children: [

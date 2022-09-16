@@ -29,7 +29,7 @@ class PDFProvider {
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) { 
           return [
-            pw.Header(text: "RASFI Method Result Sheet"),
+            pw.Header(text: "Gaussian AHP Method Result Sheet"),
             pw.Text('Development Attributes'),
             pw.Table.fromTextArray(data: _developmentAttributeArray),
             pw.Divider(),
@@ -54,7 +54,7 @@ class PDFProvider {
     final anchor = html.document.createElement('a') as html.AnchorElement
       ..href = url
       ..style.display = 'none'
-      ..download = 'rasfi_method.pdf';
+      ..download = 'gaussian_ahp_method.pdf';
     html.document.body?.children.add(anchor);
     anchor.click();
     html.document.body?.children.remove(anchor);

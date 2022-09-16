@@ -1,6 +1,6 @@
 {
-    "name": "rasfi-method",
-    "short_name": "rasfi-methd",
+    "name": "gaussian-ahp-method",
+    "short_name": "gaussian-ahp-methd",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",
