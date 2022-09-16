@@ -345,54 +345,41 @@ class _ResultPageState extends State<ResultPage> {
           ),
           ListTile(
             title: Text(
-              "Raw Matrix",
+              "Normalized Decision Matrix",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
               child: Container(
-                child: _matrixTile(data.results.decisionMatrix,
+                child: _matrixTile(data.results.normalizedDecisionMatrix,
                     alternatives: _alternatives),
               ),
             ),
           ),
-          ListTile(
-            title: Text(
-              "Transformed Matrix",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _matrixTile(data.results.transformedDecisionMatrix,
-                      alternatives: _alternatives)),
-            ),
-          ),
-          ListTile(
-            title: Text(
-              "Normalized Matrix",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _matrixTile(data.results.normalizedDecisionMatrix,
-                      alternatives: _alternatives)),
-            ),
-          ),
-          ListTile(
-            title: Text(
-              "Average estimates",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Container(
-                child: _acceptedRangeTile(
-                    [data.results.arithmeticMean, data.results.harmonicMean]),
-              ),
-            ),
-          ),
+          // ListTile(
+          //   title: Text(
+          //     "Transformed Matrix",
+          //     style: TextStyle(fontWeight: FontWeight.bold),
+          //   ),
+          //   subtitle: Padding(
+          //     padding: const EdgeInsets.all(32.0),
+          //     child: Container(
+          //         child: _matrixTile(data.results.gaussianFactor,
+          //             alternatives: _alternatives)),
+          //   ),
+          // ),
+          // ListTile(
+          //   title: Text(
+          //     "Normalized Matrix",
+          //     style: TextStyle(fontWeight: FontWeight.bold),
+          //   ),
+          //   subtitle: Padding(
+          //     padding: const EdgeInsets.all(32.0),
+          //     child: Container(
+          //         child: _matrixTile(data.results.normalizedDecisionMatrix,
+          //             alternatives: _alternatives)),
+          //   ),
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

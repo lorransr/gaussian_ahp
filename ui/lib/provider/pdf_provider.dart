@@ -10,20 +10,20 @@ class PDFProvider {
     final pdf = pw.Document();
     var _alternatives = _helper.getAlternatives(_data);
     var _rawMatrixArray =
-        _helper.getMatrixArray(_data.results.decisionMatrix, _alternatives);
-    var _transformedMatrixArray = _helper.getMatrixArray(
-        _data.results.transformedDecisionMatrix, _alternatives);
-    var _normalizedMatrixArray = _helper.getMatrixArray(
-        _data.results.normalizedDecisionMatrix, _alternatives);
+        _helper.getMatrixArray(_data.results.normalizedDecisionMatrix, _alternatives);
+    // var _transformedMatrixArray = _helper.getMatrixArray(
+    //     _data.results.transformedDecisionMatrix, _alternatives);
+    // var _normalizedMatrixArray = _helper.getMatrixArray(
+    //     _data.results.normalizedDecisionMatrix, _alternatives);
     var _developmentAttributeArray = _helper.getSeriesArray(
         _data.results.ranking,
         header: ["Alternative", "Value"]);
-    var distanceMap = {
-      "Arithmetic Mean": _data.results.arithmeticMean,
-      "Harmonic Mean": _data.results.harmonicMean
-    };
-    var _averageEstimatesArray =
-        _helper.getSeriesArray(distanceMap, header: ["Metric", "Value"]);
+    // var distanceMap = {
+    //   "Arithmetic Mean": _data.results.arithmeticMean,
+    //   "Harmonic Mean": _data.results.harmonicMean
+    // };
+    // var _averageEstimatesArray =
+    //     _helper.getSeriesArray(distanceMap, header: ["Metric", "Value"]);
     pdf.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
@@ -36,14 +36,14 @@ class PDFProvider {
             pw.Text("Inputs"),
             pw.Table.fromTextArray(data: _rawMatrixArray),
             pw.Divider(),
-            pw.Text("Transformed Matrix"),
-            pw.Table.fromTextArray(data: _transformedMatrixArray),
-            pw.Divider(),
-            pw.Text("Normalized Matrix"),
-            pw.Table.fromTextArray(data: _normalizedMatrixArray),
-            pw.Divider(),
-            pw.Text("Average Estimates"),
-            pw.Table.fromTextArray(data: _averageEstimatesArray)
+            // pw.Text("Transformed Matrix"),
+            // pw.Table.fromTextArray(data: _transformedMatrixArray),
+            // pw.Divider(),
+            // pw.Text("Normalized Matrix"),
+            // pw.Table.fromTextArray(data: _normalizedMatrixArray),
+            // pw.Divider(),
+            // pw.Text("Average Estimates"),
+            // pw.Table.fromTextArray(data: _averageEstimatesArray)
           ];
         },
       ),

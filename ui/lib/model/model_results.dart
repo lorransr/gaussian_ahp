@@ -1,15 +1,15 @@
-import 'rasfi_output.dart';
+import 'package:taxonomy_method/model/ahp_output.dart';
 
 class ModelResults {
-  final RasfiResults results;
+  final AhpResults results;
   final String error;
   ModelResults(this.results, this.error);
 
   ModelResults.fromJson(Map<String, dynamic> json)
-      : results = RasfiResults.fromJson(json),
+      : results = AhpResults.fromJson(json),
         error = "";
 
   ModelResults.withError(String errorValue)
-      : results = RasfiResults.withError(),
+      : results = AhpResults.withError(),
         error = errorValue;
 }
