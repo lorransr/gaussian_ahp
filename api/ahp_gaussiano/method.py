@@ -58,9 +58,9 @@ def gaussian_ahp_with_pearson_correlation(
         weighted_matrix=weighted_matrix.to_dict(),
         weighted_sum=weighted_sum.to_dict(),
         ranking=ranking.to_dict(),
-        correlation_matrix=correlation_matrix,
-        correlation_factor=correlation_factor,
-        normalized_correlation_factor=normalized_correlation_factor,
+        correlation_matrix=correlation_matrix.to_dict(),
+        correlation_factor=correlation_factor.to_dict(),
+        normalized_correlation_factor=normalized_correlation_factor.to_dict(),
     )
 
 
