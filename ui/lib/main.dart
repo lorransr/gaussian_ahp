@@ -1,9 +1,9 @@
-import 'package:taxonomy_method/screens/about_page.dart';
+import 'package:gaussian_ahp_method/screens/about_page.dart';
 import 'package:flutter/material.dart';
-import 'package:taxonomy_method/screens/form_page.dart';
-import 'package:taxonomy_method/screens/home_page.dart';
-import 'package:taxonomy_method/screens/matrix_page.dart';
-import 'package:taxonomy_method/screens/result_page.dart';
+import 'package:gaussian_ahp_method/screens/form_page.dart';
+import 'package:gaussian_ahp_method/screens/home_page.dart';
+import 'package:gaussian_ahp_method/screens/matrix_page.dart';
+import 'package:gaussian_ahp_method/screens/result_page.dart';
 
 void main() {
   runApp(MyApp());

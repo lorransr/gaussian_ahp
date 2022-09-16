@@ -1,4 +1,4 @@
-package com.example.taxonomy_method
+package com.example.gaussian_ahp_method
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

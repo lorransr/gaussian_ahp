@@ -1,6 +1,6 @@
-import 'package:taxonomy_method/model/ahp_input.dart';
-import 'package:taxonomy_method/model/criteria.dart';
-import 'package:taxonomy_method/model/criteria_type.dart';
+import 'package:gaussian_ahp_method/model/ahp_input.dart';
+import 'package:gaussian_ahp_method/model/criteria.dart';
+import 'package:gaussian_ahp_method/model/criteria_type.dart';
 
 class ExampleHelper {
   AhpInput ahpExample() {

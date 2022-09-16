@@ -1,4 +1,4 @@
-import 'package:taxonomy_method/model/model_results.dart';
+import 'package:gaussian_ahp_method/model/model_results.dart';
 
 class TableHelper {
   static const default_value_series = ["key", "value"];

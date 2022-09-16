@@ -1,5 +1,5 @@
-import 'package:taxonomy_method/helpers/table_helper.dart';
-import 'package:taxonomy_method/model/model_results.dart';
+import 'package:gaussian_ahp_method/helpers/table_helper.dart';
+import 'package:gaussian_ahp_method/model/model_results.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
 import 'package:universal_html/html.dart' as html;
@@ -9,8 +9,8 @@ class PDFProvider {
   createPDF(ModelResults _data) async {
     final pdf = pw.Document();
     var _alternatives = _helper.getAlternatives(_data);
-    var _rawMatrixArray =
-        _helper.getMatrixArray(_data.results.normalizedDecisionMatrix, _alternatives);
+    var _rawMatrixArray = _helper.getMatrixArray(
+        _data.results.normalizedDecisionMatrix, _alternatives);
     // var _transformedMatrixArray = _helper.getMatrixArray(
     //     _data.results.transformedDecisionMatrix, _alternatives);
     // var _normalizedMatrixArray = _helper.getMatrixArray(
@@ -27,7 +27,7 @@ class PDFProvider {
     pdf.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) { 
+        build: (pw.Context context) {
           return [
             pw.Header(text: "Gaussian AHP Method Result Sheet"),
             pw.Text('Development Attributes'),

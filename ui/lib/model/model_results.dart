@@ -1,4 +1,4 @@
-import 'package:taxonomy_method/model/ahp_output.dart';
+import 'package:gaussian_ahp_method/model/ahp_output.dart';
 
 class ModelResults {
   final AhpResults results;

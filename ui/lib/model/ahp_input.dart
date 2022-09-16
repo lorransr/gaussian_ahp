@@ -1,4 +1,4 @@
-import 'package:taxonomy_method/model/criteria.dart';
+import 'package:gaussian_ahp_method/model/criteria.dart';
 
 class AhpInput {
   List<Criteria> criterias;

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:taxonomy_method/model/criteria.dart';
-import 'package:taxonomy_method/model/criteria_type.dart';
-import 'package:taxonomy_method/screens/matrix_page.dart';
+import 'package:gaussian_ahp_method/model/criteria.dart';
+import 'package:gaussian_ahp_method/model/criteria_type.dart';
+import 'package:gaussian_ahp_method/screens/matrix_page.dart';
 
 import '../helpers/example_helper.dart';
 

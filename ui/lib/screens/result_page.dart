@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:taxonomy_method/helpers/example_helper.dart';
-import 'package:taxonomy_method/helpers/table_helper.dart';
-import 'package:taxonomy_method/model/ahp_input.dart';
-import 'package:taxonomy_method/model/shortest_distance.dart';
-import 'package:taxonomy_method/provider/pdf_provider.dart';
+import 'package:gaussian_ahp_method/helpers/example_helper.dart';
+import 'package:gaussian_ahp_method/helpers/table_helper.dart';
+import 'package:gaussian_ahp_method/model/ahp_input.dart';
+import 'package:gaussian_ahp_method/model/shortest_distance.dart';
+import 'package:gaussian_ahp_method/provider/pdf_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:taxonomy_method/bloc/results_bloc.dart';
-import 'package:taxonomy_method/model/model_results.dart';
-import 'package:taxonomy_method/screens/home_page.dart';
+import 'package:gaussian_ahp_method/bloc/results_bloc.dart';
+import 'package:gaussian_ahp_method/model/model_results.dart';
+import 'package:gaussian_ahp_method/screens/home_page.dart';
 
 class ResultPage extends StatefulWidget {
   static const routeName = '/results';

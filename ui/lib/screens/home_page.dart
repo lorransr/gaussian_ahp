@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:taxonomy_method/screens/form_page.dart';
+import 'package:gaussian_ahp_method/screens/form_page.dart';
 import 'package:crypto/crypto.dart';
 
 import 'about_page.dart';
