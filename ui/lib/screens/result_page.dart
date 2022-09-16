@@ -23,8 +23,7 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     _controller = ScrollController();
-    AhpInput? _input =
-        ModalRoute.of(context)?.settings.arguments as AhpInput?;
+    AhpInput? _input = ModalRoute.of(context)?.settings.arguments as AhpInput?;
     if (_input != null) {
       print("received inputs: $_input");
     } else {
@@ -56,7 +55,7 @@ class _ResultPageState extends State<ResultPage> {
                           snapshot.data!.error.length > 0) {
                         return _buildErrorWidget(snapshot.data!.error);
                       }
-                      return _buildSuccessWidget(snapshot.data!);
+                      return _buildSuccessWidget(snapshot.data!, _input!);
                     } else if (snapshot.hasError) {
                       return _buildErrorWidget(snapshot.error.toString());
                     } else {
@@ -191,8 +190,6 @@ class _ResultPageState extends State<ResultPage> {
       _rows.add(DataRow(cells: _cells));
     });
 
-    print("cols length: ${_cols.length}");
-    print("rows length: ${_rows.length}");
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -328,7 +325,7 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
-  Widget _buildSuccessWidget(ModelResults data) {
+  Widget _buildSuccessWidget(ModelResults data, AhpInput input) {
     List<String> _alternatives = _tableHelper.getAlternatives(data);
     return Center(
       child: Column(
@@ -356,30 +353,53 @@ class _ResultPageState extends State<ResultPage> {
               ),
             ),
           ),
-          // ListTile(
-          //   title: Text(
-          //     "Transformed Matrix",
-          //     style: TextStyle(fontWeight: FontWeight.bold),
-          //   ),
-          //   subtitle: Padding(
-          //     padding: const EdgeInsets.all(32.0),
-          //     child: Container(
-          //         child: _matrixTile(data.results.gaussianFactor,
-          //             alternatives: _alternatives)),
-          //   ),
-          // ),
-          // ListTile(
-          //   title: Text(
-          //     "Normalized Matrix",
-          //     style: TextStyle(fontWeight: FontWeight.bold),
-          //   ),
-          //   subtitle: Padding(
-          //     padding: const EdgeInsets.all(32.0),
-          //     child: Container(
-          //         child: _matrixTile(data.results.normalizedDecisionMatrix,
-          //             alternatives: _alternatives)),
-          //   ),
-          // ),
+          ListTile(
+            title: Text(
+              "Gaussian Factor (RENAME)",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Container(
+                  child: _simpleMatrixTile(data.results.gaussianFactor)),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              "Gaussian Factor",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Container(
+                  child:
+                      _seriesTile(data.results.normalizedGaussianFactor,"Alternatives")),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              "Weighted Matrix",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Container(
+                  child: _matrixTile(data.results.weightedDecisionmatrix,
+                      alternatives: _alternatives)),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              "Weighted Sum",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child:
+                  Container(child: _seriesTile(data.results.weightedSum,"Alternatives")),
+            ),
+          ),
+          _showCorrelationTiles(input, data, _alternatives),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -400,6 +420,52 @@ class _ResultPageState extends State<ResultPage> {
         ],
       ),
     );
+  }
+
+  Widget _showCorrelationTiles(
+      AhpInput input, ModelResults data, List<String> alternatives) {
+    if (input.pearsonCorrelation) {
+      return Column(
+        children: [
+            ListTile(
+            title: Text(
+              "Correlation Matrix",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Container(
+                  child:
+                      _matrixTile(data.results.correlationMatrix!,alternatives: data.results.correlationMatrix!.keys.toList())),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              "Correlation Factor",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child:
+                  Container(child: _seriesTile(data.results.correlationFactor!,"Alternatives")),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              "Normalized Correlation Factor",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child:
+                  Container(child: _seriesTile(data.results.normalizedCorrelationFactor!,"Alternatives")),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return ListTile();
+    }
   }
 
   List<DataRow> _getRowsFromResults(Map<String, dynamic> results) {
