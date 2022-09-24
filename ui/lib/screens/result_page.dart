@@ -100,22 +100,26 @@ class _ResultPageState extends State<ResultPage> {
     return
         //  Text("data: ${data.results.toJson()}");
         ListTile(
-      title: Text(
-        "✨ Alternatives Ranking ✨",
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      title: Center(
+        child: Text(
+          "✨ Alternatives Ranking ✨",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
       ),
       subtitle: Padding(
         padding: const EdgeInsets.all(32.0),
-        child: Container(
-          child: DataTable(
-            sortAscending: true,
-            sortColumnIndex: 0,
-            columns: [
-              DataColumn(label: Text("Ranking")),
-              DataColumn(label: Text("Alternative")),
-              DataColumn(label: Text("Value"))
-            ],
-            rows: _getRowsFromResults(data.results.ranking),
+        child: Center(
+          child: Container(
+            child: DataTable(
+              sortAscending: true,
+              sortColumnIndex: 0,
+              columns: [
+                DataColumn(label: Text("Ranking")),
+                DataColumn(label: Text("Alternative")),
+                DataColumn(label: Text("Value"))
+              ],
+              rows: _getRowsFromResults(data.results.weightedSum),
+            ),
           ),
         ),
       ),
@@ -340,65 +344,70 @@ class _ResultPageState extends State<ResultPage> {
             height: 32,
           ),
           ListTile(
-            title: Text(
-              "Normalized Decision Matrix",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                "Normalized Decision Matrix",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Container(
-                child: _matrixTile(data.results.normalizedDecisionMatrix,
-                    alternatives: _alternatives),
+              child: Center(
+                child: Container(
+                  child: _matrixTile(data.results.normalizedDecisionMatrix,
+                      alternatives: _alternatives),
+                ),
               ),
             ),
           ),
           ListTile(
-            title: Text(
-              "Gaussian Factor (RENAME)",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                "Variation Coefficient",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _simpleMatrixTile(data.results.gaussianFactor)),
+              child: Center(
+                child: Container(
+                    child: _seriesTile(data.results.gaussianFactor,"Criteria")),
+              ),
             ),
           ),
           ListTile(
-            title: Text(
-              "Gaussian Factor",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                "Gaussian Factor",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _seriesTile(
-                      data.results.normalizedGaussianFactor, "Alternatives")),
-            ),
-          ),
-          ListTile(
-            title: Text(
-              "Weighted Matrix",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _matrixTile(data.results.weightedDecisionmatrix,
-                      alternatives: _alternatives)),
-            ),
-          ),
-          ListTile(
-            title: Text(
-              "Weighted Sum",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _seriesTile(data.results.weightedSum, "Alternatives")),
+              child: Center(
+                child: Container(
+                    child: _seriesTile(
+                        data.results.normalizedGaussianFactor,"Criteria")),
+              ),
             ),
           ),
           _showCorrelationTiles(input, data, _alternatives),
+          ListTile(
+            title: Center(
+              child: Text(
+                "Weighted Matrix",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: Center(
+                child: Container(
+                    child: _matrixTile(data.results.weightedDecisionmatrix,
+                        alternatives: _alternatives)),
+              ),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -427,40 +436,52 @@ class _ResultPageState extends State<ResultPage> {
       return Column(
         children: [
           ListTile(
-            title: Text(
-              "Correlation Matrix",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                "Correlation Matrix",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _matrixTile(data.results.correlationMatrix!,
-                      alternatives:
-                          data.results.correlationMatrix!.keys.toList())),
+              child: Center(
+                child: Container(
+                    child: _matrixTile(data.results.correlationMatrix!,
+                        alternatives:
+                            data.results.correlationMatrix!.keys.toList())),
+              ),
             ),
           ),
           ListTile(
-            title: Text(
-              "Correlation Factor",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                "Correlation Factor",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _seriesTile(
-                      data.results.correlationFactor!, "Alternatives")),
+              child: Center(
+                child: Container(
+                    child: _seriesTile(
+                        data.results.correlationFactor!, "Alternatives")),
+              ),
             ),
           ),
           ListTile(
-            title: Text(
-              "Normalized Correlation Factor",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                "Normalized Correlation Factor",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Container(
-                  child: _seriesTile(data.results.normalizedCorrelationFactor!,
-                      "Alternatives")),
+              child: Center(
+                child: Container(
+                    child: _seriesTile(data.results.normalizedCorrelationFactor!,
+                        "Criteria")),
+              ),
             ),
           ),
         ],

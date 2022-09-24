@@ -20,6 +20,6 @@ class ExampleHelper {
         criterias: _criterias,
         vars: _vars,
         alternativesNames: _alternativesNames,
-        pearsonCorrelation: false);
+        pearsonCorrelation: true);
   }
 }

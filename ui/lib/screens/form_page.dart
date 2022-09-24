@@ -41,7 +41,7 @@ class _CriteriaFormState extends State<CriteriaForm> {
 
   @override
   Widget build(BuildContext context) {
-    criteriaList = _input.criterias;
+    // criteriaList = _input.criterias;
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -88,8 +88,6 @@ class _CriteriaFormState extends State<CriteriaForm> {
   }
 
   bool _validateCriteria(List<Criteria> criteriaList) {
-    print(criteriaList.length);
-    print(criteriaList.map((e) => e.toJson()));
     bool validWeight = true;
     return validWeight;
   }

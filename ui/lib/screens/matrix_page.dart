@@ -17,6 +17,7 @@ class MatrixPage extends StatefulWidget {
 class _MatrixPageState extends State<MatrixPage> {
   /// Create a Key for EditableState
   final _tableKey = GlobalKey();
+  bool isWithPearsonCorrelation = false;
 
   List<Criteria> _criterias = [];
   List<DataColumn> _cols = [];
@@ -49,7 +50,6 @@ class _MatrixPageState extends State<MatrixPage> {
             FilteringTextInputFormatter.allow(RegExp(r"^\d*\.?\d*"))
           ],
           onFieldSubmitted: (val) {
-            print(val);
           },
           validator: (val) {
             if (val!.isEmpty) {
@@ -70,7 +70,6 @@ class _MatrixPageState extends State<MatrixPage> {
           showCursor: false,
           keyboardType: TextInputType.text,
           onFieldSubmitted: (val) {
-            print(val);
           },
           validator: (val) {
             if (val!.isEmpty) {
@@ -145,14 +144,14 @@ class _MatrixPageState extends State<MatrixPage> {
     ScaffoldMessenger.of(context).showSnackBar(snack);
   }
 
-  void _submit(List<Criteria> criterias) {
+  void _submit(List<Criteria> criterias,bool isWithPearsonCorrelation) {
     List<List<double>> alternatives = _getAlternatives();
     List<String> alternativesNames = _getAlternativesNames();
     if (_validAlternatives(alternatives)) {
       AhpInput input = AhpInput(
           criterias: criterias,
           alternativesNames: alternativesNames,
-          pearsonCorrelation: false,
+          pearsonCorrelation: isWithPearsonCorrelation,
           vars: alternatives);
       Navigator.pushNamed(context, ResultPage.routeName, arguments: input);
     } else {
@@ -193,13 +192,24 @@ class _MatrixPageState extends State<MatrixPage> {
     return criterias;
   }
 
+    Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.blueGrey;
+  }
+
   @override
   Widget build(BuildContext context) {
     // _criterias = _generateCriterias(20);
     // _cols = _createCols(_criterias);
     List<Criteria> _criterias =
         ModalRoute.of(context)?.settings.arguments as List<Criteria>;
-    print("n criterias: ${_criterias.length}");
     _cols = _createCols(_criterias);
     return Scaffold(
       appBar: AppBar(
@@ -253,6 +263,18 @@ class _MatrixPageState extends State<MatrixPage> {
               ),
             ],
           ),
+          CheckboxListTile(
+            title: Text("Calculate using pearson correlation extension method"),
+            activeColor: Colors.blue,
+            visualDensity: VisualDensity.compact,
+            value: isWithPearsonCorrelation,
+            onChanged: (value){
+              setState(() {
+                isWithPearsonCorrelation = value!;
+                print("pearson_correlation: $isWithPearsonCorrelation");
+              });
+            },
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -263,7 +285,7 @@ class _MatrixPageState extends State<MatrixPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        _submit(_criterias);
+                        _submit(_criterias,isWithPearsonCorrelation);
                       },
                       child: Text("Submit"),
                       style: ElevatedButton.styleFrom(
