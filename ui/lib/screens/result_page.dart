@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:gaussian_ahp_method/helpers/example_helper.dart';
 import 'package:gaussian_ahp_method/helpers/table_helper.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:gaussian_ahp_method/bloc/results_bloc.dart';
 import 'package:gaussian_ahp_method/model/model_results.dart';
 import 'package:gaussian_ahp_method/screens/home_page.dart';
+import 'package:screenshot/screenshot.dart';
 
 class ResultPage extends StatefulWidget {
   static const routeName = '/results';
@@ -18,6 +20,8 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   late ScrollController _controller;
+  ScreenshotController screenshotController = ScreenshotController();
+  late Uint8List _imageFile;
   var _pdfProvider = PDFProvider();
   var _tableHelper = TableHelper();
   @override
@@ -55,7 +59,9 @@ class _ResultPageState extends State<ResultPage> {
                           snapshot.data!.error.length > 0) {
                         return _buildErrorWidget(snapshot.data!.error);
                       }
-                      return _buildSuccessWidget(snapshot.data!, _input!);
+                      return Screenshot(
+                          child: _buildSuccessWidget(snapshot.data!, _input!),
+                          controller: screenshotController);
                     } else if (snapshot.hasError) {
                       return _buildErrorWidget(snapshot.error.toString());
                     } else {
@@ -186,7 +192,6 @@ class _ResultPageState extends State<ResultPage> {
       var _alternativeCell = DataCell(Text(a));
       _cells.add(_alternativeCell);
       matrix.keys.forEach((key) {
-        print(matrix[key]);
         var _cell = DataCell(Text(matrix[key][a].toStringAsFixed(3)));
         _cells.add(_cell);
       });
@@ -205,7 +210,6 @@ class _ResultPageState extends State<ResultPage> {
 
   Widget _relativeAssessmentMatrixTile(Map<String, dynamic> matrix) {
     List<DataColumn> _cols = [];
-    print(matrix);
     _cols.add(DataColumn(label: Text("")));
     _cols.addAll(matrix.keys.map((e) => DataColumn(label: Text(e))));
     List<DataRow> _rows = [];
@@ -371,7 +375,8 @@ class _ResultPageState extends State<ResultPage> {
               padding: const EdgeInsets.all(32.0),
               child: Center(
                 child: Container(
-                    child: _seriesTile(data.results.gaussianFactor,"Criteria")),
+                    child:
+                        _seriesTile(data.results.gaussianFactor, "Criteria")),
               ),
             ),
           ),
@@ -387,7 +392,7 @@ class _ResultPageState extends State<ResultPage> {
               child: Center(
                 child: Container(
                     child: _seriesTile(
-                        data.results.normalizedGaussianFactor,"Criteria")),
+                        data.results.normalizedGaussianFactor, "Criteria")),
               ),
             ),
           ),
@@ -414,8 +419,23 @@ class _ResultPageState extends State<ResultPage> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                    onPressed: () => _pdfProvider.createPDF(data),
-                    child: Text("Print Results")),
+                    onPressed: () {
+                      screenshotController
+                      .capture(pixelRatio: 1.1)
+                      .then((image) async {
+                        if (image != null) {
+                          setState(() {
+                            _imageFile = image;
+                            _pdfProvider.creatPdfFromImage(_imageFile);
+                          });
+                          // _pdfProvider.creatPdfFromImage(_imageFile);
+                        }
+                      }).catchError((onError) {
+                        print(onError);
+                      });
+                    },
+                    child: Text("Print Results"),
+                    ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -479,8 +499,8 @@ class _ResultPageState extends State<ResultPage> {
               padding: const EdgeInsets.all(32.0),
               child: Center(
                 child: Container(
-                    child: _seriesTile(data.results.normalizedCorrelationFactor!,
-                        "Criteria")),
+                    child: _seriesTile(
+                        data.results.normalizedCorrelationFactor!, "Criteria")),
               ),
             ),
           ),

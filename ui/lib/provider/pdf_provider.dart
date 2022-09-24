@@ -1,3 +1,7 @@
+import 'dart:typed_data';
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:gaussian_ahp_method/helpers/table_helper.dart';
 import 'package:gaussian_ahp_method/model/model_results.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -6,6 +10,29 @@ import 'package:universal_html/html.dart' as html;
 
 class PDFProvider {
   var _helper = TableHelper();
+  creatPdfFromImage(Uint8List img) async {
+    print("start printing");
+    final _image = pw.MemoryImage(img);
+    final doc = pw.Document();
+
+    doc.addPage(pw.Page(
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Image(_image),
+          ); // Center
+        }));
+    final bytes = await doc.save();
+    final blob = html.Blob([bytes], 'application/pdf');
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    final anchor = html.document.createElement('a') as html.AnchorElement
+      ..href = url
+      ..style.display = 'none'
+      ..download = 'gaussian_ahp_method.pdf';
+    html.document.body?.children.add(anchor);
+    anchor.click();
+    html.document.body?.children.remove(anchor);
+    html.Url.revokeObjectUrl(url);
+  }
   createPDF(ModelResults _data) async {
     final pdf = pw.Document();
     var _alternatives = _helper.getAlternatives(_data);
