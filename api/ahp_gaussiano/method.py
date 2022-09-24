@@ -48,7 +48,7 @@ def gaussian_ahp_with_pearson_correlation(
     correlation_factor = (1 - correlation_avg) * normalized_gaussian_factor
     normalized_correlation_factor = correlation_factor / correlation_factor.sum()
     weighted_matrix = normalized_matrix * normalized_correlation_factor
-    weighted_sum = weighted_matrix.sum(axis=1)
+    weighted_sum = weighted_matrix.sum(axis=1).sort_values(ascending=False)
     ranking = weighted_sum.rank(ascending=False)
 
     return AhpOutputs(
