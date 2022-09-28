@@ -3,9 +3,9 @@ import pandas as pd
 
 
 def normalize_matrix(inputs: AhpInputs):
-    matrix = pd.DataFrame(inputs.decision_matrix,index=inputs.alternatives)
+    matrix = pd.DataFrame(inputs.vars,columns=inputs.criteria,index=inputs.alternatives)
 
-    for criteria, criteria_type in inputs.criteria_type.items():
+    for criteria, criteria_type in dict(zip(inputs.criteria,inputs.criteria_type_list)).items():
         if criteria_type == "MAX":
 
             matrix.loc[:, criteria] = matrix[criteria] / matrix[criteria].sum()
@@ -48,7 +48,7 @@ def gaussian_ahp_with_pearson_correlation(
     correlation_factor = (1 - correlation_avg) * normalized_gaussian_factor
     normalized_correlation_factor = correlation_factor / correlation_factor.sum()
     weighted_matrix = normalized_matrix * normalized_correlation_factor
-    weighted_sum = weighted_matrix.sum(axis=1)
+    weighted_sum = weighted_matrix.sum(axis=1).sort_values(ascending=False)
     ranking = weighted_sum.rank(ascending=False)
 
     return AhpOutputs(
@@ -58,9 +58,9 @@ def gaussian_ahp_with_pearson_correlation(
         weighted_matrix=weighted_matrix.to_dict(),
         weighted_sum=weighted_sum.to_dict(),
         ranking=ranking.to_dict(),
-        correlation_matrix=correlation_matrix,
-        correlation_factor=correlation_factor,
-        normalized_correlation_factor=normalized_correlation_factor,
+        correlation_matrix=correlation_matrix.to_dict(),
+        correlation_factor=correlation_factor.to_dict(),
+        normalized_correlation_factor=normalized_correlation_factor.to_dict(),
     )
 
 

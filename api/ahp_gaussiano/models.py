@@ -1,14 +1,16 @@
 from dataclasses import dataclass
 import pandas as pd
 from pydantic import BaseModel
+from typing import List
 
 
 
 class AhpInputs(BaseModel):
     class Config:
         arbitrary_types_allowed = True
-    decision_matrix: dict
-    criteria_type: dict
+    vars: List[List[float]]
+    criteria: List[str]
+    criteria_type_list: List[str]
     pearson_correlation: bool
     alternatives: list
 

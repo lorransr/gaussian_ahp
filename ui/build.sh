@@ -1,0 +1,3 @@
+cd build/web/
+zip -r  ../../rasfi.zip .
+cd ...

@@ -5,46 +5,42 @@ import numpy as np
 
 
 def get_gaussian_ahp_inputs() -> AhpInputs:
-    decision_matrix = {
-        "custo": [1500, 1800, 5000],
-        "camera": [12, 12, 20],
-        "armazenamento": [64, 128, 128],
-        "duracao": [24, 18, 10],
-    }
+    vars = [
+        [1500,12,64,24],
+        [1800,12,128,18],
+        [5000,20,128,10],
+        ]
+    criteria = ["custo","camera","armazenamento","duracao"]
     alternatives = ["xiaomi", "samsung", "iphone"]
-    criteria_type = {
-        "custo": "MIN",
-        "camera": "MAX",
-        "armazenamento": "MAX",
-        "duracao": "MAX",
-    }
+    criteria_type = ["MIN","MAX","MAX","MAX"]
     return AhpInputs(
-        decision_matrix=decision_matrix,
-        criteria_type=criteria_type,
+        vars=vars,
+        criteria=criteria,
+        criteria_type_list=criteria_type,
         pearson_correlation=False,
         alternatives=alternatives
     )
 
 
 def get_gaussian_ahp_pearson_correlation_inputs() -> AhpInputs:
-    decision_matrix = {
-        "custo": [6700, 4100, 2650],
-        "camera": [12, 64, 108],
-        "armazenamento": [128, 256, 128],
-        "tela": [6.1, 6.2, 6.7],
-        "duracao": [19, 24, 30],
-    }
+    vars = [
+        [6700,12,128,6.1,19],
+        [4100,65,256,6.2,24],
+        [2650,108,128,6.7,30]
+    ]
+    criteria = ["custo","camera","armazenamento","tela","duracao"]
     alternatives = ["iphone", "samsung", "motorola"]
-    criteria_type = {
-        "custo": "MIN",
-        "camera": "MAX",
-        "armazenamento": "MAX",
-        "tela": "MAX",
-        "duracao": "MAX",
-    }
+    criteria_type = [
+        "MIN",
+        "MAX",
+        "MAX",
+        "MAX",
+        "MAX",
+    ]
     return AhpInputs(
-        decision_matrix=decision_matrix,
-        criteria_type=criteria_type,
+        vars=vars,
+        criteria=criteria,
+        criteria_type_list=criteria_type,
         pearson_correlation=True,
         alternatives=alternatives
     )
