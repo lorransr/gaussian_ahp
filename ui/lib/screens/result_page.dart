@@ -420,19 +420,19 @@ class _ResultPageState extends State<ResultPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      screenshotController
-                      .capture(pixelRatio: 1.1)
-                      .then((image) async {
-                        if (image != null) {
-                          setState(() {
-                            _imageFile = image;
-                            _pdfProvider.creatPdfFromImage(_imageFile);
-                          });
-                          // _pdfProvider.creatPdfFromImage(_imageFile);
-                        }
-                      }).catchError((onError) {
-                        print(onError);
-                      });
+                      _pdfProvider.createPDF(data);
+                      // screenshotController
+                      // .capture(pixelRatio: 1.1)
+                      // .then((image) async {
+                      //   if (image != null) {
+                      //     setState(() {
+                      //       _imageFile = image;
+                      //       _pdfProvider.creatPdfFromImage(_imageFile);
+                      //     });
+                      //   }
+                      // }).catchError((onError) {
+                      //   print(onError);
+                      // });
                     },
                     child: Text("Print Results"),
                     ),

@@ -62,13 +62,18 @@ class TableHelper {
     return _matrixArray;
   }
 
-  List<List<dynamic>> getSeriesArray(Map<String, dynamic> series,
+  List<List<dynamic>>? getSeriesArray(Map<String, dynamic>? series,
       {List<String> header = default_value_series, bool ascending = true}) {
     List<List<dynamic>> seriesArray = [];
     List<List<dynamic>> results = [];
-    series.forEach((key, value) {
+    if (series != null){
+      series.forEach((key, value) {
       seriesArray.add([key, double.parse(value.toString()).toStringAsFixed(3)]);
-    });
+      });
+    }else{
+      return null;
+    }
+
     // if(ascending==true){
     //   seriesArray.sort((a,b)=>a.last<b.last);
     // }
