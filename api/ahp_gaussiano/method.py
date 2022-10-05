@@ -25,7 +25,7 @@ def gaussian_ahp(
     normalized_gaussian_factor: pd.Series,
 ):
     weighted_matrix = normalized_matrix * normalized_gaussian_factor
-    weighted_sum = weighted_matrix.sum(axis=1)
+    weighted_sum = weighted_matrix.sum(axis=1).sort_values(ascending=False)
     ranking = weighted_sum.rank(ascending=False)
 
     return AhpOutputs(
