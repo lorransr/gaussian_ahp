@@ -13,13 +13,13 @@ class ExampleHelper {
     List<List<double>> _vars = [
       [1500, 12, 64, 24],
       [1800, 12, 128, 18],
-      [5000, 20, 128, 10],
+      [100, 20, 128, 10],
     ];
     List<String> _alternativesNames = ["xiaomi", "samsung", "iphone"];
     return AhpInput(
         criterias: _criterias,
         vars: _vars,
         alternativesNames: _alternativesNames,
-        pearsonCorrelation: true);
+        pearsonCorrelation: false);
   }
 }

@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
-              onPressed: () => _showPassWordDialog(),
+              onPressed: () =>  Navigator.pushNamed(context, CriteriaForm.routeName),
               child: Text("start"),
               style: ElevatedButton.styleFrom(
                 primary: Colors.green,
